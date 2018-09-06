@@ -1,0 +1,27 @@
+2018-09-06 15:09:53 [main] INFO  Orchestrator:18 - Jetzt geht's erst mal los und wir loggen ein wenig.
+2018-09-06 15:09:53 [main] INFO  Orchestrator:19 - Ich beschraenke mich dabei auf Dateiausgabe, koennte aber auch zum Beispiel in eine Cassandra loggen um im Nachgang z.B.via Apache Spark Auswertungenauf den Logs zu betreiben.
+2018-09-06 15:09:53 [main] ERROR Orchestrator:21 - Falls wir in einen Fehler laufen, so wuerde dieser im Fehlerlog auftauchen
+2018-09-06 15:09:53 [main] ERROR Orchestrator:22 - Das Fehlerlog wuerde ich von Nagios ueberwachen lassen.
+2018-09-06 15:09:53 [main] ERROR Orchestrator:23 - Alternativ kann über den Apache Kafka Appender auch eine aktive Benachrichtigung erfolgen
+2018-09-06 15:09:53 [main] DEBUG Orchestrator:25 - Falls wir Zusatzinformationen zum debuggen brauchen werden diese hier gelogt.
+2018-09-06 15:09:53 [main] DEBUG Orchestrator:26 - Debugging kann zur Laufzeit durch Anpassung der log4j Konfiguration zugeschaltet werden.
+2018-09-06 15:09:53 [main] INFO  Orchestrator:56 - Ooops, der Insert hat funktioniert da der typ nicht geprueft wird
+2018-09-06 15:09:53 [main] ERROR Orchestrator:64 - Erst bei der Verarbeitung bricht es uns mit einer cast Exception weg
+java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.CharSequence
+	at java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169) ~[?:1.8.0_181]
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382) ~[?:1.8.0_181]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[?:1.8.0_181]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[?:1.8.0_181]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_181]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_181]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[?:1.8.0_181]
+	at de.phyrophox.sandbox.halloVUT.Orchestrator.demonstriertDenUnGeprueftenUmgangMitCollections(Orchestrator.java:62) [classes/:?]
+	at de.phyrophox.sandbox.halloVUT.Orchestrator.main(Orchestrator.java:35) [classes/:?]
+2018-09-06 15:09:53 [main] INFO  Orchestrator:67 - Und alle Informationen sind weg: 
+2018-09-06 15:09:53 [main] ERROR Orchestrator:89 - Das hat dank der checkedList nicht funktioniert. Die Exception ist aussagekraeftig und kurz.
+java.lang.ClassCastException: Attempt to insert class java.lang.Integer element into collection with element type class java.lang.String
+	at java.util.Collections$CheckedCollection.typeCheck(Collections.java:3037) ~[?:1.8.0_181]
+	at java.util.Collections$CheckedCollection.add(Collections.java:3080) ~[?:1.8.0_181]
+	at de.phyrophox.sandbox.halloVUT.Orchestrator.demonstriertDenGeprueftenUmgangMitCollections(Orchestrator.java:87) [classes/:?]
+	at de.phyrophox.sandbox.halloVUT.Orchestrator.main(Orchestrator.java:36) [classes/:?]
+2018-09-06 15:09:53 [main] INFO  Orchestrator:101 - So haben wir zumindest einen Teil der Information gerettet: Jeep, Mercedes, Audi, BMW

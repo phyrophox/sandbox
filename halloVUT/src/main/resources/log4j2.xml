@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- FF: dieKonfiguration wird zur Laufzeit alle 30 Sekunden neu angezogen, dies ermoeglicht uns Aenderungen im laufenden Betrieb -->
+<Configuration status="INFO" monitorInterval="30">
+ 
+ 	<!-- FF: Ich teile ueber den  ThresholdFilter auf drei, jeweils rollierende Logdateien auf --> 
+	<Appenders>
+	
+		<Console name="ConsoleLog" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+		</Console>
+ 
+ 		<RollingFile name="DebugLog" filename="log/halloVUT-debug.log" 		 	
+			filepattern="${logPath}/%d{YYYYMMddHHmmss}-debug.log">
+			<PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="128 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+			<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+		</RollingFile>
+ 
+		<RollingFile name="InfoLog" filename="log/halloVUT-info.log"			
+			filepattern="${logPath}/%d{YYYYMMddHHmmss}-info.log">
+			<PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="64 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+			<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+		</RollingFile>
+
+		<RollingFile name="ErrorLog" filename="log/halloVUT-error.log"		    
+			filepattern="${logPath}/%d{YYYYMMddHHmmss}-error.log">
+			<PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="64 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+			<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+		</RollingFile>
+ 
+	</Appenders>
+	
+	
+	<Loggers>
+
+	<Logger name="de.phyrophox.sandbox" level="all" >       
+       		<AppenderRef ref="ErrorLog" />
+       		<AppenderRef ref="InfoLog" />
+        	<AppenderRef ref="DebugLog" />                                 
+    </Logger>
+    
+                            
+    <Root level="error">
+      <AppenderRef ref="ConsoleLog"/>
+    </Root>
+
+
+
+</Loggers>
+	
+	
+	
+	
+	
+</Configuration>
